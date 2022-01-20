@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sober_clock/pages/hour_page.dart';
+import 'package:sober_clock/pages/page_handler.dart';
 
 ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Colors.white,
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             themeMode: currentMode,
             theme: lightTheme,
             darkTheme: darkTheme,
-            home: const HourPage(),
+            home: const PageHandler(),
           );
         });
   }

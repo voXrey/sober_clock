@@ -3,19 +3,13 @@ import 'package:sober_clock/main.dart';
 import 'package:sober_clock/models/hour_model.dart';
 
 class HourViewModel {
-  static DateTime now = DateTime.now();
-  HourModel hourModel = HourModel(
-    hour: now.hour,
-    minute: now.minute,
-    second: now.second,
-  );
+  HourModel hourModel = HourModel();
 
-  void updateHour(DateTime date) {
-    hourModel = HourModel(
-      hour: date.hour,
-      minute: date.minute,
-      second: date.second,
-    );
+  void updateHour() {
+    DateTime date = DateTime.now();
+    hourModel.hour = date.hour;
+    hourModel.minute = date.minute;
+    hourModel.second = date.second;
   }
 
   String getHourMinuteString() {

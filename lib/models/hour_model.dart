@@ -1,11 +1,11 @@
-class HourModel {
-  final int hour;
-  final int minute;
-  final int second;
+import 'dart:async';
 
-  HourModel({
-    required this.hour,
-    required this.minute,
-    required this.second,
-  });
+class HourModel {
+  int hour = 0;
+  int minute = 0;
+  int second = 0;
+
+  Timer? timer;
+
+  HourModel();
 }

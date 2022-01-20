@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:sober_clock/view_models/hour_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class HourPage extends StatefulWidget {
   const HourPage({Key? key}) : super(key: key);
@@ -15,31 +14,29 @@ class _HourPageState extends State<HourPage> {
   HourViewModel hourViewModel = HourViewModel();
 
   void updateHourStrings() {
-    setState(() => hourViewModel.updateHour(DateTime.now()));
-  }
-
-  void _handleDoubleTap() {
-    hourViewModel.onDoubleTap();
+    setState(() {
+      hourViewModel.updateHour();
+    });
   }
 
   @override
   void initState() {
+    hourViewModel.updateHour();
     super.initState();
-    Timer.periodic(
+    hourViewModel.hourModel.timer = Timer.periodic(
         const Duration(seconds: 1), (Timer t) => updateHourStrings());
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.immersiveSticky,
-      overlays: [],
-    );
+  }
+
+  @override
+  void dispose() {
+    hourViewModel.hourModel.timer?.cancel();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onDoubleTap: _handleDoubleTap,
-      child: Center(
+      body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -55,6 +52,6 @@ class _HourPageState extends State<HourPage> {
           )
         ],
       )),
-    ));
+    );
   }
 }
